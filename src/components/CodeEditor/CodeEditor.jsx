@@ -7,12 +7,12 @@ const CodeEditor = ({ language, value, onChange }) => {
     //     // console.log('here is the current model value:', value);
     // }
     return (
-        <div>
+        <div className='h-full'>
             <Editor
                 theme='vs-dark'
                 onChange={onChange}
                 value={value}
-                height="80vh"
+                height={"100%"}
                 width={"100%"}
                 defaultLanguage={language?.toLowerCase() || "javascript"}
                 defaultValue="// some comment"

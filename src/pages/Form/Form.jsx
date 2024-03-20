@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import CodeEditor from '../components/CodeEditor/CodeEditor';
+import CodeEditor from '../../components/CodeEditor/CodeEditor';
 import axios from "axios"
 import { toast } from 'sonner';
-import Loader from "../assets/loader.svg"
+
+
 
 const Form = () => {
     // Define state variables to store form field values
@@ -44,9 +45,9 @@ const Form = () => {
     return (
         <>
             <div className='h-full'>
-                <h1 className='text-center'>Enter your Details and Submit Code</h1>
-                <div className='border-green-500 mt-6 mx-6 h-[20rem]'>
-                    <form onSubmit={handleSubmit} className='flex gap-4 border-2 border-[#252525] rounded-t-xl p-4 w-full h-fit'>
+                
+                <div className='border-green-500 mt-6  h-[20rem]'>
+                    <form onSubmit={handleSubmit} className='flex flex-col lg:flex-row gap-4 border-2 border-[#252525] rounded-t-xl p-4 w-full min-h-[85vh] max-h-fit'>
                         <div className='flex flex-col w-full'>
                             {Object.entries(allValues).map(([key, value]) => {
                                 if (key === "sourceCode") {
@@ -54,8 +55,8 @@ const Form = () => {
                                 }
                                 return (
 
-                                    <div key={key} className='flex flex-col gap-2 mb-4'>
-                                        <label htmlFor={key} className='poppins-bold'>{key.charAt(0).toUpperCase() + key.slice(1)} <span className='text-red-400'>*</span></label>
+                                    <div key={key} className='flex flex-col gap-2 mb-6'>
+                                        <label htmlFor={key} className='poppins-thin text-[0.85rem]'>{key.charAt(0).toUpperCase() + key.slice(1)} <span className='text-red-400'>*</span></label>
                                         {key === 'codeLanguage' ? (
                                             <select id={key} name={key} value={value} onChange={handleChange} className='bg-[#272525] h-[2.5rem] focus:outline-none p-2 rounded-md text-[0.8rem] poppins-regular'>
                                                 <option value="">Select Language</option>
@@ -75,13 +76,13 @@ const Form = () => {
                                     </div>
                                 )
                             })}
-                            <div className='flex-1 flex items-end'>
+                            <div className='flex-1 hidden lg:flex items-end'>
                                 <button disabled={loading} className={` rounded-lg  ${loading ? "cursor-not-allowed bg-[#f7660bcb]" : "bg-[#f7640b] hover:bg-[#ff8a41]"} w-[8rem]  py-2 h-[2.5rem] flex items-center justify-center gap-2`}>  {loading ? <svg className='w-[1rem] animate-spin' viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill="#fff" d="M12.9 3.1c1.3 1.2 2.1 3 2.1 4.9 0 3.9-3.1 7-7 7s-7-3.1-7-7c0-1.9 0.8-3.7 2.1-4.9l-0.8-0.8c-1.4 1.5-2.3 3.5-2.3 5.7 0 4.4 3.6 8 8 8s8-3.6 8-8c0-2.2-0.9-4.2-2.3-5.7l-0.8 0.8z"></path> </g></svg> : "Submit"}</button>
 
                             </div>
                         </div>
-                        <div className='flex flex-col gap-2 mb-4 w-full'>
-                            <label htmlFor="sourceCode" className='poppins-bold flex items-center justify-between'>
+                        <div className='flex flex-col gap-2 w-full'>
+                            <label htmlFor="sourceCode" className='poppins-thin text-[0.85rem] flex items-center justify-between'>
                                 <div >
                                     Source Code <span className='text-red-400'>*</span>
                                 </div>
@@ -89,6 +90,11 @@ const Form = () => {
                             </label>
                             <CodeEditor language={allValues.codeLanguage} value={allValues.sourceCode} onChange={(value) => setAllValues({ ...allValues, sourceCode: value })} />
                         </div>
+
+                        <div className='flex-1 flex items-end lg:hidden'>
+                                <button disabled={loading} className={` rounded-lg  ${loading ? "cursor-not-allowed bg-[#f7660bcb]" : "bg-[#f7640b] hover:bg-[#ff8a41]"} w-[8rem]  py-2 h-[2.5rem] flex items-center justify-center gap-2`}>  {loading ? <svg className='w-[1rem] animate-spin' viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill="#fff" d="M12.9 3.1c1.3 1.2 2.1 3 2.1 4.9 0 3.9-3.1 7-7 7s-7-3.1-7-7c0-1.9 0.8-3.7 2.1-4.9l-0.8-0.8c-1.4 1.5-2.3 3.5-2.3 5.7 0 4.4 3.6 8 8 8s8-3.6 8-8c0-2.2-0.9-4.2-2.3-5.7l-0.8 0.8z"></path> </g></svg> : "Submit"}</button>
+
+                            </div>
                     </form>
                 </div>
             </div>
