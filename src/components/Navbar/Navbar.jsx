@@ -1,5 +1,5 @@
 import React from 'react'
-import SquareArrowUpRightIcon from '../../components/ui/Icons';
+import {SquareArrowUpRightIcon} from '../../components/ui/Icons';
 import { Link, useLocation } from 'react-router-dom';
 import TUF from "../../assets/tuf.png";
 
@@ -13,7 +13,7 @@ const Navbar = () => {
                     <img className='w-full h-full rounded-full' src={TUF} alt="" />
                 </div>
                 <Link to={location.pathname === "/" ? "/submissions" : "/"}>
-                    <div className='border-2 border-transparent hover:border-b-2 hover:border-b-[#f7640b] cursor-pointer flex items-center gap-1'><span className='hidden lg:block'>{location.pathname === "/" ? "Submissions" : "Home"}</span><SquareArrowUpRightIcon /></div>
+                    <div className='border-2 border-transparent hover:border-b-2 hover:border-b-[#f7640b] cursor-pointer flex items-center gap-1'><span className=''>{location.pathname === "/" ? "Submissions" : "Home"}</span><SquareArrowUpRightIcon /></div>
                 </Link>
             </nav>
         </>

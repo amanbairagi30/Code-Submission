@@ -6,6 +6,8 @@ const CodeEditor = ({ language, value, onChange }) => {
     // function handleEditorChange(value, event) {
     //     // console.log('here is the current model value:', value);
     // }
+
+    console.log(language?.split(" ")[0]?.toLowerCase() , "----- editor me ")
     return (
         <div className='h-full'>
             <Editor
@@ -14,7 +16,8 @@ const CodeEditor = ({ language, value, onChange }) => {
                 value={value}
                 height={"100%"}
                 width={"100%"}
-                defaultLanguage={language?.toLowerCase() || "javascript"}
+                language={language?.split(" ")[0]?.toLowerCase() === "c++" ? "cpp" : ""}
+                defaultLanguage={"javascript"}
                 defaultValue="// some comment"
             />
         </div>
