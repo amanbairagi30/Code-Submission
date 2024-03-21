@@ -25,7 +25,7 @@ const Form = () => {
         }
         console.log('All Values Data:', allValues);
         setLoading(true);
-        const res = await axios.post("http://localhost:8080/api/submit", allValues);
+        const res = await axios.post(`${import.meta.env.VITE_SERVER_URL}/api/submit`, allValues);
         setLoading(false);
         console.log(res);
         if (res.data.success) {
