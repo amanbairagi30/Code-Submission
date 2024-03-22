@@ -4,6 +4,7 @@ import { LoaderCircleIcon } from '../../components/ui/Icons';
 
 const Submission = () => {
   const [submissionsData, setSubmissionsData] = useState([]);
+  const [loadingStatus, setLoading] = useState({ status: false, message: null });
 
   useEffect(() => {
     getSubmissionsData();
@@ -11,23 +12,25 @@ const Submission = () => {
 
   const getSubmissionsData = async () => {
     try {
-
+      setLoading({ status: true, message: "Loading Submissions..." });
       const res = await axios.get(`${import.meta.env.VITE_SERVER_URL}/api/get-submissions`);
-      console.log(res)
+      setLoading({ status: false, message: "Submissions fetched successfully..." });
+      // console.log(res)
       if (res?.data?.success) {
         setSubmissionsData(res.data.allCodeData);
-        console.log(res.data?.message);
+        // console.log(res.data?.message);
       } else {
-        console.log(res.data?.message);
+        // console.log(res.data?.message);
         throw new Error(res.data?.message);
       }
 
     } catch (error) {
-      console.log(error);
+      setLoading({ status: false, message: `Error fetching submissions : ${error.message}` });
+      // console.log(error);
     }
   }
 
-  console.log(submissionsData && submissionsData.length > 0 && Object.keys(submissionsData[0]));
+  // console.log(submissionsData && submissionsData.length > 0 && Object.keys(submissionsData[0]));
 
   const renderValues = (key, value) => {
     switch (key.toLowerCase()) {
@@ -74,32 +77,42 @@ const Submission = () => {
           <div className='px-2 mt-4 overflow-auto'>
             {/* {JSON.stringify(submissionsData)} */}
             <table className="border-collapse w-full border border-gray-400">
-              <tr className='border-2 border-[#252525] text-[0.8rem] font-normal p-6 '>
-                {submissionsData && submissionsData.length > 0 && Object.keys(submissionsData[0]).map((key, index) => {
-                  console.log(key);
-                  return (
-                    <th className='p-4' key={index}>{key?.toUpperCase()}</th>
-                  )
-                })}
-              </tr>
-              {submissionsData && submissionsData?.map(elem => (
-                <>
+              <thead>
 
+                <tr className='border-2 border-[#252525] text-[0.8rem] font-normal p-6 '>
+                  {submissionsData && submissionsData.length > 0 && Object.keys(submissionsData[0]).map((key, index) => {
+                    // console.log(key);
+                    return (
+                      <th className='p-4' key={index}>{key?.toUpperCase()}</th>
+                    )
+                  })}
+                </tr>
+              </thead>
+
+              <tbody>
+                {submissionsData && submissionsData?.map(elem => (
                   <tr className='border-2 text-[0.9rem] border-[#252525] max-h-[6rem] mt-2' key={elem.id}>
                     {Object.entries(elem).map(([key, value], index) => (
                       <td className='p-4 bg-[#0b0b0b]' key={index}>{renderValues(key, value)}</td>
                     ))}
                   </tr>
+                ))}
 
-                </>
-              ))}
-
+              </tbody>
             </table>
           </div>
           :
-          <div className='mt-10 mb-4 flex gap-2 items-center text-[0.8rem] '>
-            Loading Submissions <LoaderCircleIcon className={"animate-spin"} />
-          </div>
+          loadingStatus.status ? (
+            <div className='mt-10 mb-4 flex gap-2 items-center text-[0.8rem] '>
+              {loadingStatus.message}<LoaderCircleIcon className={"animate-spin"} />
+            </div>
+          ) : (
+            <>
+              <div className='mt-10 mb-4 flex gap-2 items-center text-[0.8rem] '>
+                {loadingStatus.message}
+              </div>
+            </>
+          )
         }
 
       </div>

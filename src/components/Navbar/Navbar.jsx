@@ -8,7 +8,7 @@ const Navbar = () => {
 
     return (
         <>
-            <nav className='flex sticky top-[0.8rem] bg-[#161616] px-3 py-3 h-fit border-2 border-[#252525] rounded-full text-[0.8rem] items-center justify-between '>
+            <nav className='flex z-50 sticky top-[0.8rem] bg-[#161616] px-3 py-3 h-fit border-2 border-[#252525] rounded-full text-[0.8rem] items-center justify-between '>
                 <div className='text-center w-[2rem] h-auto rounded-full'>
                     <img className='w-full h-full rounded-full' src={TUF} alt="" />
                 </div>
