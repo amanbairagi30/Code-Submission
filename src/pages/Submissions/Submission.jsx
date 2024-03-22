@@ -39,6 +39,24 @@ const Submission = () => {
         return (
           <pre className="whitespace-pre-wrap w-full rounded-md bg-[#202020] p-4">{value || "-"}</pre>
         );
+
+      case 'codelanguage':
+        switch (value) {
+          case "54":
+            return "C++ (GCC 9.2.0)"
+
+          case "71":
+            return "Python (3.8.1)"
+
+          case "91":
+            return "Java (JDK 17.0.6)"
+
+          case "93":
+            return "JavaScript (Node.js 18.15.0)"
+
+          default:
+            return "NULL"
+        }
       case 'timestamp':
         const date = new Date(value);
         return date.toLocaleString('en-IN', { day: '2-digit', month: 'short', year: 'numeric'/*, hour: '2-digit', minute: '2-digit'*/ });

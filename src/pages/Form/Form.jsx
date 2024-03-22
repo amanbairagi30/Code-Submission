@@ -209,7 +209,7 @@ const Form = () => {
                         </div>
                         <div className=' gap-2 flex items-end'>
                             <button type='submit' disabled={loading} className={` rounded-md ${loading ? "cursor-not-allowed bg-[#f7660bcb]" : "bg-[#f7640b] hover:bg-[#ff8a41]"} w-[8rem]  py-2 h-[2.5rem] flex items-center justify-center gap-2`}>  {loading ? <LoaderCircleIcon className={"animate-spin"} /> : "Submit"}</button>
-                            <button type='button' onClick={runCode} disabled={loading} className={` rounded-md  ${loading ? "cursor-not-allowed bg-[#f7660bcb]" : "bg-transparent  hover:bg-[#202020]"} w-[8rem]  py-2 h-[2.5rem] flex items-center justify-center gap-2`}>  {loading ? <LoaderCircleIcon className={"animate-spin"} /> : "Run Code"}</button>
+                            <button type='button' onClick={runCode} disabled={loading} className={` rounded-md  ${loading ? "cursor-not-allowed bg-[#202020]" : "bg-transparent  hover:bg-[#202020]"} w-[8rem]  py-2 h-[2.5rem] flex items-center justify-center gap-2`}>  {loading ? <LoaderCircleIcon className={"animate-spin"} /> : "Run Code"}</button>
                         </div>
                     </form>
                 </div>
